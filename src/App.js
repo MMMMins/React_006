@@ -59,16 +59,16 @@ class ScoreTable extends React.Component{
             function scoreCheck1(score){
                 if (score > 30){
                     alert("30점을 넘길 수 없습니다.");
-                    return 30;
+                    return true;
                 }
-                return score;
+                return false;
             }
             function scoreCheck2(score){
                 if(score > 20){
                     alert("20점을 넘길 수 없습니다.");
-                    return 20;
+                    return true;
                 }
-                return score;
+                return false;
             }
 
             //NAN값을 0으로 치환하기
@@ -160,7 +160,11 @@ class ScoreTable extends React.Component{
             $('input[name=attendance]').on("keyup", function (){
                 scoreDict.attendance = parseInt($(this).val())
                 nanCheck("attendance");
-                scoreDict.attendance = scoreCheck2(scoreDict.attendance);
+                if(scoreCheck2(scoreDict.attendance)){
+                    $(this).val("20")
+                    scoreDict.attendance = 20
+                    return;
+                }
                 if(sum()){
                     scoreDict.attendance = 0
                     $(this).val("")
@@ -169,7 +173,11 @@ class ScoreTable extends React.Component{
             $('input[name=assignment]').on("keyup", function (){
                 scoreDict.assignment = parseInt($(this).val())
                 nanCheck("assignment");
-                scoreDict.assignment = scoreCheck2(scoreDict.assignment);
+                if(scoreCheck2(scoreDict.assignment)){
+                    $(this).val("20")
+                    scoreDict.assignment = 20
+                    return;
+                }
                 if(sum()){
                     scoreDict.assignment = 0
                     $(this).val("")
@@ -178,7 +186,11 @@ class ScoreTable extends React.Component{
             $('input[name=midScore]').on("keyup", function (){
                 scoreDict.midScore =  parseInt($(this).val())
                 nanCheck("midScore");
-                scoreDict.midScore = scoreCheck1(scoreDict.midScore);
+                if(scoreCheck1(scoreDict.midScore)){
+                    $(this).val("30")
+                    scoreDict.midScore = 30
+                    return;
+                }
                 if(sum()){
                     scoreDict.midScore = 0
                     $(this).val("")
@@ -187,7 +199,11 @@ class ScoreTable extends React.Component{
             $('input[name=finalScore]').on("keyup", function (){
                 scoreDict.finalScore = parseInt($(this).val())
                 nanCheck("finalScore");
-                scoreDict.finalScore = scoreCheck1(scoreDict.finalScore);
+                if(scoreCheck1(scoreDict.finalScore)){
+                    $(this).val("30")
+                    scoreDict.finalScore = 30
+                    return;
+                }
                 if(sum()){
                     scoreDict.finalScore = 0
                     $(this).val("")
